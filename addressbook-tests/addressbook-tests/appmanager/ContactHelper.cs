@@ -26,9 +26,36 @@ namespace WebAddressBookTests
 
         public void Remove(string id)
         {
+            manager.Navigator.GoToHomePage();
             SelectContact(id);
             DeleteContact();
             CloseAlertAndGetItsText();
+        }
+
+        public void Modify(string id, ContactData newcData)
+        {
+            manager.Navigator.GoToContactsPage();
+            ClickModifyContact(id);
+            FillContactForm(newcData);
+            ClickUpdateContact();
+            ReturnToHomePage();
+        }
+
+        private void ReturnToHomePage()
+        {
+            driver.FindElement(By.LinkText("home page")).Click();
+        }
+
+        private void ClickUpdateContact()
+        {
+            driver.FindElement(By.XPath("(//input[@name='update'])[2]")).Click();
+        }
+
+        private void ClickModifyContact(string id)
+        {
+            // driver.FindElement(By.Id("18")).Click();
+            
+            driver.FindElement(By.CssSelector("img[alt=\"Edit\"]")).Click();
         }
 
         public void DeleteContact()
@@ -84,7 +111,7 @@ namespace WebAddressBookTests
             new SelectElement(driver.FindElement(By.Name("amonth"))).SelectByText(contact.AnnivMonth);
             driver.FindElement(By.Name("ayear")).Clear();
             driver.FindElement(By.Name("ayear")).SendKeys(contact.AnnivYear);
-            new SelectElement(driver.FindElement(By.Name("new_group"))).SelectByText(contact.ContactGroup);
+            //new SelectElement(driver.FindElement(By.Name("new_group"))).SelectByText(contact.ContactGroup);
             driver.FindElement(By.Name("address2")).Clear();
             driver.FindElement(By.Name("address2")).SendKeys(contact.Address2);
             driver.FindElement(By.Name("phone2")).Clear();

@@ -35,5 +35,9 @@ namespace WebAddressBookTests
             driver.FindElement(By.LinkText("add new")).Click();
         }
 
+        internal void GoToContactsPage()
+        {
+            driver.Navigate().GoToUrl(baseURL + "/addressbook/index.php");
+        }
     }
 }
