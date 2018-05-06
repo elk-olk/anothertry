@@ -58,9 +58,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ContactCreation.cs" />
-    <Compile Include="ContactData.cs" />
-    <Compile Include="ContactHelper.cs" />
+    <Compile Include="Tests\ContactRemoval.cs" />
+    <Compile Include="Tests\ContactCreation.cs" />
+    <Compile Include="Model\ContactData.cs" />
+    <Compile Include="appmanager\ContactHelper.cs" />
     <Compile Include="Tests\GroupModificationTests.cs" />
     <Compile Include="Model\AccountData.cs" />
     <Compile Include="appmanager\ApplicationManager.cs" />

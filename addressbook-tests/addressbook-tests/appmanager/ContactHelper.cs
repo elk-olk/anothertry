@@ -11,6 +11,8 @@ namespace WebAddressBookTests
 {
     public class ContactHelper : HelperBase
     {
+        private bool acceptNextAlert = true;
+
         public ContactHelper(ApplicationManager manager) : base(manager)
         {
         }
@@ -20,6 +22,13 @@ namespace WebAddressBookTests
             manager.Navigator.GoToAddNewContact();
             FillContactForm(contact);
             SubmitContactCreation();
+        }
+
+        public void Remove(string id)
+        {
+            SelectContact(id);
+            DeleteContact();
+            CloseAlertAndGetItsText();
         }
 
         public void DeleteContact()
@@ -88,5 +97,29 @@ namespace WebAddressBookTests
         {
             driver.FindElement(By.XPath("//input[@value='Enter']")).Click();
         }
-    }
+
+        private string CloseAlertAndGetItsText()
+        {
+            try
+            {
+                IAlert alert = driver.SwitchTo().Alert();
+                string alertText = alert.Text;
+                if (acceptNextAlert)
+                {
+                    alert.Accept();
+                }
+                else
+                {
+                    alert.Dismiss();
+                }
+                return alertText;
+            }
+            finally
+            {
+                acceptNextAlert = true;
+            }
+        }
+    
+
+}
 }
