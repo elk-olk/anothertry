@@ -30,6 +30,10 @@ namespace WebAddressBookTests
             driver.Navigate().GoToUrl(baseURL + "/addressbook/group.php");
         }
 
+        public void GoToAddNewContact()
+        {
+            driver.FindElement(By.LinkText("add new")).Click();
+        }
 
     }
 }

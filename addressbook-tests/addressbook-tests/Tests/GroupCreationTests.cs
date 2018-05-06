@@ -13,12 +13,10 @@ namespace WebAddressBookTests
         [Test]
         public void GroupCreationTest()
         {
-            
             GroupData group = new GroupData("aaa");
             group.Header = "ooo";
             group.Footer = "zzz";
             app.Groups.Create(group);
-            app.Auth.Logout();
         }
 
         [Test]
@@ -29,7 +27,7 @@ namespace WebAddressBookTests
             group.Header = "";
             group.Footer = "";
             app.Groups.Create(group);
-            app.Auth.Logout();
+
         }
     }
 }
