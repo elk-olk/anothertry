@@ -27,9 +27,9 @@ namespace WebAddressBookTests
             baseURL = "http://localhost";
             verificationErrors = new StringBuilder();
 
-            loginHelper = new LoginHelper(driver);
-            navigator = new NavigationHelper(driver, baseURL);
-            groupHelper = new GroupHelper(driver);
+            loginHelper = new LoginHelper(this);
+            navigator = new NavigationHelper(this, baseURL);
+            groupHelper = new GroupHelper(this);
         }
 
         public void Stop()
@@ -69,5 +69,12 @@ namespace WebAddressBookTests
             }
         }
 
+        public IWebDriver Driver
+        {
+            get
+            {
+                return driver;
+            }
+        }
     }
 }
