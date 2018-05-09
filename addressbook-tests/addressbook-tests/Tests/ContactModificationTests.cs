@@ -40,6 +40,7 @@ namespace WebAddressBookTests
             newcData.PhoneMobile = "380634905515";
             newcData.PhoneWork = "380444905516";
             newcData.Title = "Mrs";
+            newcData.ContactGroup = null;
 
             app.Contacts.Modify("1", newcData);
         }
