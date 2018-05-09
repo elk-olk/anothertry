@@ -17,59 +17,67 @@ namespace WebAddressBookTests
         {
         }
 
-        public void Create(ContactData contact)
+        public ContactHelper Create(ContactData contact)
         {
             manager.Navigator.GoToAddNewContact();
             FillContactForm(contact);
             SubmitContactCreation();
+            return this;
         }
 
-        public void Remove(string id)
+        public ContactHelper Remove(int index)
         {
             manager.Navigator.GoToHomePage();
-            SelectContact(id);
+            SelectContact(index);
             DeleteContact();
             CloseAlertAndGetItsText();
+            return this;
         }
 
-        public void Modify(string id, ContactData newcData)
+        public ContactHelper Modify(string id, ContactData newcData)
         {
             manager.Navigator.GoToContactsPage();
             ClickModifyContact(id);
             FillContactForm(newcData);
             ClickUpdateContact();
             ReturnToHomePage();
+            return this;
         }
 
-        private void ReturnToHomePage()
+        private ContactHelper ReturnToHomePage()
         {
             driver.FindElement(By.LinkText("home page")).Click();
+            return this;
         }
 
-        private void ClickUpdateContact()
+        private ContactHelper ClickUpdateContact()
         {
             driver.FindElement(By.XPath("(//input[@name='update'])[2]")).Click();
+            return this;
         }
 
-        private void ClickModifyContact(string id)
+        private ContactHelper ClickModifyContact(string id)
         {
             // driver.FindElement(By.Id("18")).Click();
             
             driver.FindElement(By.CssSelector("img[alt=\"Edit\"]")).Click();
+            return this;
         }
 
-        public void DeleteContact()
+        public ContactHelper DeleteContact()
         {
             driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
+            return this;
         }
 
-        public void SelectContact(string id)
+        public ContactHelper SelectContact(int index)
         {
             driver.FindElement(By.LinkText("home")).Click();
-            driver.FindElement(By.Id(id)).Click();
+            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
+            return this;
         }
 
-        public void FillContactForm(ContactData contact)
+        public ContactHelper FillContactForm(ContactData contact)
         {
             driver.FindElement(By.Name("firstname")).Clear();
             driver.FindElement(By.Name("firstname")).SendKeys(contact.FirstName);
@@ -118,11 +126,13 @@ namespace WebAddressBookTests
             driver.FindElement(By.Name("phone2")).SendKeys(contact.Phone2);
             driver.FindElement(By.Name("notes")).Clear();
             driver.FindElement(By.Name("notes")).SendKeys(contact.ContactNotes);
+            return this;
 
         }
-        public void SubmitContactCreation()
+        public ContactHelper SubmitContactCreation()
         {
             driver.FindElement(By.XPath("//input[@value='Enter']")).Click();
+            return this;
         }
 
         private string CloseAlertAndGetItsText()
