@@ -27,9 +27,7 @@ namespace WebAddressBookTests
                 driver.FindElement(locator).Clear();
                 driver.FindElement(locator).SendKeys(text);
             }
-
         }
-  
 
         public void SelectElements(By locator, string text)
         {
@@ -39,5 +37,18 @@ namespace WebAddressBookTests
             }
         }
 
+
+        public bool IsElementPresent(By by)
+        {
+            try
+            {
+                driver.FindElement(by);
+                return true;
+            }
+            catch (NoSuchElementException)
+            {
+                return false;
+            }
+        }
     }
 }

@@ -21,11 +21,13 @@ namespace WebAddressBookTests
         protected NavigationHelper navigator;
         protected GroupHelper groupHelper;
         protected ContactHelper contactHelper;
-        private static ThreadLocal<ApplicationManager> app = new ThreadLocal<ApplicationManager>() ;
+        public static ThreadLocal<ApplicationManager> app = new ThreadLocal<ApplicationManager>() ;
+
 
         private ApplicationManager()
         {
             driver = new FirefoxDriver();
+
             baseURL = "http://localhost";
             verificationErrors = new StringBuilder();
 
@@ -34,6 +36,7 @@ namespace WebAddressBookTests
             groupHelper = new GroupHelper(this);
             contactHelper = new ContactHelper(this);
         }
+
 
         ~ApplicationManager()
         {
@@ -52,9 +55,12 @@ namespace WebAddressBookTests
         {
             if (! app.IsValueCreated)
             {
-                app.Value = new ApplicationManager();
+
+                ApplicationManager newInstance = new ApplicationManager();
+                newInstance.Navigator.GoToHomePage();
+                app.Value = newInstance;
             }
-            return app.Value;
+            return app.Value ;
         }
 
         public LoginHelper Auth

@@ -37,7 +37,7 @@ namespace WebAddressBookTests
         public ContactHelper Modify(string id, ContactData newcData)
         {
             manager.Navigator.GoToContactsPage();
-            ClickModifyContact(id);
+            ClickModifyContact();
             FillContactForm(newcData);
             ClickUpdateContact();
             ReturnToHomePage();
@@ -56,10 +56,9 @@ namespace WebAddressBookTests
             return this;
         }
 
-        private ContactHelper ClickModifyContact(string id)
+        private ContactHelper ClickModifyContact()
         {
-            // driver.FindElement(By.Id("18")).Click();
-            
+           
             driver.FindElement(By.CssSelector("img[alt=\"Edit\"]")).Click();
             return this;
         }
