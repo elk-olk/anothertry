@@ -14,23 +14,25 @@ namespace WebAddressBookTests
         [Test]
         public void LoginWithValidCredentials()
         {
-            //app.Auth.Logout();
+
+            app.Auth.Logout();
 
             AccountData account = new AccountData("admin","secret");
             app.Auth.Login(account);
 
-            //Assert.IsTrue(app.Auth.IsLoggedIn());
+            Assert.IsTrue(app.Auth.IsLoggedIn());
         }
 
         [Test]
-        public void LoginWithInalidCredentials()
+        public void LoginWithInvalidCredentials()
         {
-            //app.Auth.Logout();
+
+            app.Auth.Logout();
 
             AccountData account = new AccountData("admin", "132231");
 
             app.Auth.Login(account);
-            //Assert.IsFalse(app.Auth.IsLoggedIn());
+            Assert.IsFalse(app.Auth.IsLoggedIn());
         }
     }
 }

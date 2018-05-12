@@ -16,6 +16,11 @@ namespace WebAddressBookTests
             GroupData newData = new GroupData("111");
             newData.Header = null;
             newData.Footer = null;
+
+            if (!app.Groups.GroupExists())
+            {
+                app.Groups.CreateFirstGroup();
+            }
             app.Groups.Modify(1, newData);
         }
 

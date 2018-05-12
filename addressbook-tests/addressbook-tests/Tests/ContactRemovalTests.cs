@@ -14,6 +14,10 @@ namespace WebAddressBookTests
         [Test]
         public void ContactRemovalTests()
         {
+            if (!app.Contacts.ContactExists())
+            {
+                app.Contacts.CreateFirstContact();
+            }
             app.Contacts.Remove(1);
         }
     }

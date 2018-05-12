@@ -101,5 +101,13 @@ namespace WebAddressBookTests
                 return driver;
             }
         }
+
+        public ContactCreationTests contactCreation
+        {
+            get
+            {
+                return contactCreation;
+            }
+        }
     }
 }

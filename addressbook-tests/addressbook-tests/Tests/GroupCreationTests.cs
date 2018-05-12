@@ -19,15 +19,15 @@ namespace WebAddressBookTests
             app.Groups.Create(group);
         }
 
-        //[Test]
-        //public void EmptyGroupCreationTest()
-        //{
+        [Test]
+        public void EmptyGroupCreationTest()
+        {
 
-        //    GroupData group = new GroupData("");
-        //    group.Header = "";
-        //    group.Footer = "";
-        //    app.Groups.Create(group);
+            GroupData group = new GroupData("");
+            group.Header = "";
+            group.Footer = "";
+            app.Groups.Create(group);
 
-        //}
+        }
     }
 }

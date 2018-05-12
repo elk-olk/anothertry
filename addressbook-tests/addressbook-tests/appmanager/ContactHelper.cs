@@ -135,7 +135,26 @@ namespace WebAddressBookTests
                 acceptNextAlert = true;
             }
         }
-    
 
-}
+        public bool ContactExists()
+        {
+            manager.Navigator.GoToContactsPage();
+            return IsElementPresent(By.CssSelector("img[alt=\"Edit\"]"));
+        }
+
+        public ContactHelper CreateFirstContact()
+        {
+            ContactData firstContact = new ContactData("ART");
+            firstContact.NickName = "ART";
+            firstContact.FirstName = "Elena";
+            firstContact.MiddleName = "Igorevna";
+            firstContact.LastName = "Denega";
+            firstContact.ContactNotes = "first test contact";
+            manager.Navigator.GoToAddNewContact();
+            FillContactForm(firstContact);
+            SubmitContactCreation();
+            return this;
+        }
+
+    }
 }

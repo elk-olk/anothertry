@@ -24,13 +24,13 @@ namespace WebAddressBookTests
         private string eMail2 = "";
         private string eMail3 = "";
         private string homePage = "";
-        private string birthDay = "";
-        private string birthMonth = "";
-        private string birthYear = "";
-        private string annivDay = "";
-        private string annivMonth = "";
-        private string annivYear = "";
-        private string contactGroup = "";
+        private string birthDay = null;
+        private string birthMonth = null;
+        private string birthYear = null;
+        private string annivDay = null;
+        private string annivMonth = null;
+        private string annivYear = null;
+        private string contactGroup = null;
         private string contactAddress2 = "";
         private string phone2 = "";
         private string contactNotes = "";
@@ -41,43 +41,6 @@ namespace WebAddressBookTests
             this.firstName = firstName;
         }
 
-
-        //public ContactData(string firstName, string middleName, string lastName,
-        //                    string nickName, string foto, string title,
-        //                    string company, string contactAddress1, string phoneHome,
-        //                    string phoneMobile, string phoneWork, string fax,
-        //                    string eMail1, string eMail2, string eMail3, string homePage,
-        //                    string birthDay, string birthMonth, string birthYear,
-        //                    string annivDay, string annivMonth, string annivYear,
-        //                    string contactGroup, string contactAddress2, string phone2, string contactNotes)
-        //{
-        //    this.firstName = firstName;
-        //    this.middleName = middleName;
-        //    this.lastName = lastName;
-        //    this.nickName = nickName;
-        //    this.foto = foto;
-        //    this.title = title;
-        //    this.company = company;
-        //    this.contactAddress1 = contactAddress1;
-        //    this.phoneHome = phoneHome;
-        //    this.phoneMobile = phoneMobile;
-        //    this.phoneWork = phoneWork;
-        //    this.fax = fax;
-        //    this.eMail1 = eMail1;
-        //    this.eMail2 = eMail2;
-        //    this.eMail3 = eMail3;
-        //    this.homePage = homePage;
-        //    this.birthDay = birthDay;
-        //    this.birthMonth = birthMonth;
-        //    this.birthYear = birthYear;
-        //    this.annivDay = annivDay;
-        //    this.annivMonth = annivMonth;
-        //    this.annivYear = annivYear;
-        //    this.contactGroup = contactGroup;
-        //    this.contactAddress2 = contactAddress2;
-        //    this.phone2 = phone2;
-        //    this.contactNotes = contactNotes;
-        //}
 
         public string FirstName
         {

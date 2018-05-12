@@ -13,37 +13,40 @@ namespace WebAddressBookTests
         [Test]
         public void ContactModificationTest()
         {
-            ContactData newcData = new ContactData("OLK");
-            newcData.NickName = "olk";
-            newcData.Address = "Kiev1";
-            newcData.Address2 = "Kiev2";
-            newcData.AnnivDay = "1";
-            newcData.AnnivMonth = "December";
-            newcData.AnnivYear = "2013";
-            newcData.BirthDay = "1";
-            newcData.BirthMonth = "August";
-            newcData.BirthYear = "1977";
-            newcData.Company = "Turbo";
-            newcData.ContactGroup = "[none]";
-            newcData.ContactNotes = "olk notes";
-            newcData.EMail1 = "olk@gmail.com";
-            newcData.EMail2 = "olk@rambler.ru";
-            newcData.EMail3 = "olk@ukr.net";
-            newcData.Fax = "+380444905512";
-            newcData.FirstName = "Elena";
-            //contact.Foto = "ava.jpg";
-            newcData.HomePage = "www.olk.com";
-            newcData.LastName = "Steblevska";
-            newcData.MiddleName = "Vladimirovna";
-            newcData.Phone2 = "+3804449055123";
-            newcData.PhoneHome = "+380444905514";
-            newcData.PhoneMobile = "380634905515";
-            newcData.PhoneWork = "380444905516";
-            newcData.Title = "Mrs";
-            newcData.ContactGroup = null;
+            ContactData modifData = new ContactData("OLK");
+                        modifData.NickName = "olk";
+                        modifData.Address = "Kiev1";
+                        modifData.Address2 = "Kiev2";
+                        modifData.AnnivDay = "1";
+                        modifData.AnnivMonth = "December";
+                        modifData.AnnivYear = "2013";
+                        modifData.BirthDay = "1";
+                        modifData.BirthMonth = "August";
+                        modifData.BirthYear = "1977";
+                        modifData.Company = "Turbo";
+                        modifData.ContactGroup = "[none]";
+                        modifData.ContactNotes = "modyfied contact";
+                        modifData.EMail1 = "olk@gmail.com";
+                        modifData.EMail2 = "olk@rambler.ru";
+                        modifData.EMail3 = "olk@ukr.net";
+                        modifData.Fax = "+380444905512";
+                        modifData.FirstName = "Elena";
+                        //contact.Foto = "ava.jpg";
+                        modifData.HomePage = "www.olk.com";
+                        modifData.LastName = "Steblevska";
+                        modifData.MiddleName = "Vladimirovna";
+                        modifData.Phone2 = "+3804449055123";
+                        modifData.PhoneHome = "+380444905514";
+                        modifData.PhoneMobile = "380634905515";
+                        modifData.PhoneWork = "380444905516";
+                        modifData.Title = "Mrs";
+                        modifData.ContactGroup = null;
 
-            app.Contacts.Modify("1", newcData);
+            if (!app.Contacts.ContactExists())
+            {
+                app.Contacts.CreateFirstContact();
+            }
+                app.Contacts.Modify("1", modifData);
         }
-
     }
 }
