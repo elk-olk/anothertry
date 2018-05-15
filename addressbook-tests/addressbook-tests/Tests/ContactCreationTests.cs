@@ -3,6 +3,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using NUnit.Framework;
+using System.Collections.Generic;
 
 
 namespace WebAddressBookTests
@@ -13,7 +14,7 @@ namespace WebAddressBookTests
         [Test]
         public void AddContact()
         {
-            ContactData contact = new ContactData("Steblevska");
+            ContactData contact = new ContactData("Tatiana", "Steblevska");
             contact.NickName = "olk";
             contact.Address = "Kiev1";
             contact.Address2 = "Kiev2";
@@ -30,7 +31,7 @@ namespace WebAddressBookTests
             contact.EMail2 = "olk@rambler.ru";
             contact.EMail3 = "olk@ukr.net";
             contact.Fax = "+380444905512";
-            contact.FirstName = "Elena";
+            contact.FirstName = "Tatiana";
             //contact.Foto = "ava.jpg";
             contact.HomePage = "www.olk.com";
             contact.LastName = "Steblevska";
@@ -41,8 +42,15 @@ namespace WebAddressBookTests
             contact.PhoneWork = "380444905516";
             contact.Title = "Mrs";
 
+            List<ContactData> oldContacts = app.Contacts.GetContactList();
+
             app.Contacts.Create(contact);
 
+            List<ContactData> newContacts = app.Contacts.GetContactList();
+            oldContacts.Add(contact);
+            oldContacts.Sort();
+            newContacts.Sort();
+            Assert.AreEqual(oldContacts, newContacts);
         }
     }
 }

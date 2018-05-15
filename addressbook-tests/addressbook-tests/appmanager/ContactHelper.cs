@@ -34,7 +34,7 @@ namespace WebAddressBookTests
             return this;
         }
 
-        public ContactHelper Modify(string id, ContactData newcData)
+        public ContactHelper Modify(ContactData newcData)
         {
             manager.Navigator.GoToContactsPage();
             ClickModifyContact();
@@ -63,6 +63,23 @@ namespace WebAddressBookTests
             return this;
         }
 
+        public List<ContactData> GetContactList()
+        {
+            List<ContactData> contactsList = new List<ContactData>();
+            manager.Navigator.GoToContactsPage();
+            
+            ICollection<IWebElement> elements = driver.FindElements(By.XPath("(//input[@name='selected[]'])"));
+
+            foreach (IWebElement element in elements)
+            {
+                string title = element.GetAttribute("title").Remove(0,8).Replace(")", " ");
+                string[] fullname = title.Split(' '); 
+                contactsList.Add(new ContactData(fullname[0], fullname[1]));
+            }
+            return contactsList;
+        }
+
+
         public ContactHelper DeleteContact()
         {
             driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
@@ -72,7 +89,7 @@ namespace WebAddressBookTests
         public ContactHelper SelectContact(int index)
         {
             driver.FindElement(By.LinkText("home")).Click();
-            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
+            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + (index + 1) + "]")).Click();
             return this;
         }
 
@@ -144,7 +161,7 @@ namespace WebAddressBookTests
 
         public ContactHelper CreateFirstContact()
         {
-            ContactData firstContact = new ContactData("ART");
+            ContactData firstContact = new ContactData("Elena", "Denega");
             firstContact.NickName = "ART";
             firstContact.FirstName = "Elena";
             firstContact.MiddleName = "Igorevna";

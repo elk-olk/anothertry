@@ -13,7 +13,7 @@ namespace WebAddressBookTests
         [Test]
         public void ContactModificationTest()
         {
-            ContactData modifData = new ContactData("OLK");
+            ContactData modifData = new ContactData("Maria", "Zueva");
                         modifData.NickName = "olk";
                         modifData.Address = "Kiev1";
                         modifData.Address2 = "Kiev2";
@@ -30,10 +30,10 @@ namespace WebAddressBookTests
                         modifData.EMail2 = "olk@rambler.ru";
                         modifData.EMail3 = "olk@ukr.net";
                         modifData.Fax = "+380444905512";
-                        modifData.FirstName = "Elena";
+                        modifData.FirstName = "Maria";
                         //contact.Foto = "ava.jpg";
                         modifData.HomePage = "www.olk.com";
-                        modifData.LastName = "Steblevska";
+                        modifData.LastName = "Zueva";
                         modifData.MiddleName = "Vladimirovna";
                         modifData.Phone2 = "+3804449055123";
                         modifData.PhoneHome = "+380444905514";
@@ -46,7 +46,18 @@ namespace WebAddressBookTests
             {
                 app.Contacts.CreateFirstContact();
             }
-                app.Contacts.Modify("1", modifData);
+
+            List<ContactData> oldContacts = app.Contacts.GetContactList();
+
+            app.Contacts.Modify(modifData);
+
+            List<ContactData> newContacts = app.Contacts.GetContactList();
+            oldContacts[0].FirstName = modifData.FirstName;
+            oldContacts[0].LastName = modifData.LastName;
+
+            oldContacts.Sort();
+            newContacts.Sort();
+            Assert.AreEqual(oldContacts, newContacts);
         }
     }
 }
