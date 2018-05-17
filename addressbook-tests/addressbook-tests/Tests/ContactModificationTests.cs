@@ -13,8 +13,8 @@ namespace WebAddressBookTests
         [Test]
         public void ContactModificationTest()
         {
-            ContactData modifData = new ContactData("Maria", "Zueva");
-                        modifData.NickName = "olk";
+            ContactData modifData = new ContactData("Tatiana", "Steblevska");
+                        modifData.NickName = "stv";
                         modifData.Address = "Kiev1";
                         modifData.Address2 = "Kiev2";
                         modifData.AnnivDay = "1";
@@ -30,10 +30,10 @@ namespace WebAddressBookTests
                         modifData.EMail2 = "olk@rambler.ru";
                         modifData.EMail3 = "olk@ukr.net";
                         modifData.Fax = "+380444905512";
-                        modifData.FirstName = "Maria";
+                        modifData.FirstName = "Tatiana";
                         //contact.Foto = "ava.jpg";
                         modifData.HomePage = "www.olk.com";
-                        modifData.LastName = "Zueva";
+                        modifData.LastName = "Steblevska";
                         modifData.MiddleName = "Vladimirovna";
                         modifData.Phone2 = "+3804449055123";
                         modifData.PhoneHome = "+380444905514";

@@ -14,8 +14,8 @@ namespace WebAddressBookTests
         [Test]
         public void AddContact()
         {
-            ContactData contact = new ContactData("Tatiana", "Steblevska");
-            contact.NickName = "olk";
+            ContactData contact = new ContactData("Tamila", "Steblevska");
+            contact.NickName = "stv";
             contact.Address = "Kiev1";
             contact.Address2 = "Kiev2";
             contact.AnnivDay = "1";
@@ -31,7 +31,7 @@ namespace WebAddressBookTests
             contact.EMail2 = "olk@rambler.ru";
             contact.EMail3 = "olk@ukr.net";
             contact.Fax = "+380444905512";
-            contact.FirstName = "Tatiana";
+            contact.FirstName = "Tamila";
             //contact.Foto = "ava.jpg";
             contact.HomePage = "www.olk.com";
             contact.LastName = "Steblevska";

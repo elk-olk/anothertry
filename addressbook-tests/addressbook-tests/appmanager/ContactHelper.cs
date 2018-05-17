@@ -67,14 +67,14 @@ namespace WebAddressBookTests
         {
             List<ContactData> contactsList = new List<ContactData>();
             manager.Navigator.GoToContactsPage();
-            
-            ICollection<IWebElement> elements = driver.FindElements(By.XPath("(//input[@name='selected[]'])"));
 
-            foreach (IWebElement element in elements)
+            ICollection<IWebElement> elements = driver.FindElements(By.XPath("//tr[@name = 'entry']//td"));
+                
+            for (int i = 2; i <= elements.Count;)
+
             {
-                string title = element.GetAttribute("title").Remove(0,8).Replace(")", " ");
-                string[] fullname = title.Split(' '); 
-                contactsList.Add(new ContactData(fullname[0], fullname[1]));
+                contactsList.Add(new ContactData(elements.ElementAt(i).Text, elements.ElementAt(i-1).Text));
+                i = i + 10;
             }
             return contactsList;
         }
