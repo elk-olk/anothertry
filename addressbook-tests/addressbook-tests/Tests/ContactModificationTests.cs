@@ -51,6 +51,8 @@ namespace WebAddressBookTests
 
             app.Contacts.Modify(modifData);
 
+            Assert.AreEqual(oldContacts.Count, app.Contacts.GetContactsListCount());
+
             List<ContactData> newContacts = app.Contacts.GetContactList();
             oldContacts[0].FirstName = modifData.FirstName;
             oldContacts[0].LastName = modifData.LastName;
