@@ -67,7 +67,7 @@ namespace WebAddressBookTests
         public  int GetContactsListCount()
         {
             manager.Navigator.GoToContactsPage();
-            return driver.FindElements(By.XPath("//tr[@name = 'entry']")).Count;
+            return driver.FindElements(By.Name("entry")).Count;
         }
 
         private List<ContactData> contactCache = null;
@@ -77,16 +77,17 @@ namespace WebAddressBookTests
             if (contactCache == null)
             {
                 contactCache = new List<ContactData>();
-                List<ContactData> contactsList = new List<ContactData>();
+                IList<ContactData> contactsList = new List<ContactData>();
                 manager.Navigator.GoToContactsPage();
 
-                ICollection<IWebElement> elements = driver.FindElements(By.XPath("//tr[@name = 'entry']//td"));
+                IList<IWebElement> rows = driver.FindElements(By.Name("entry"));
 
-                for (int i = 2; i <= elements.Count;)
-
+                foreach (IWebElement row in rows)
                 {
-                    contactCache.Add(new ContactData(elements.ElementAt(i).Text, elements.ElementAt(i - 1).Text));
-                    i = i + 10;
+                    IList<IWebElement> cells = row.FindElements(By.TagName("td"));
+                    string lastName = cells[1].Text;
+                    string firstName = cells[2].Text;
+                    contactCache.Add(new ContactData(firstName, lastName));
                 }
 
             }
