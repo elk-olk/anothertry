@@ -49,7 +49,7 @@ namespace WebAddressBookTests
                 return true;
             }
 
-            return firstName == other.firstName & lastName == other.lastName;
+            return lastName == other.lastName & firstName == other.firstName ;
         }
 
         public int CompareTo(ContactData other)
