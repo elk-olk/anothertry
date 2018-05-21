@@ -49,7 +49,7 @@ namespace WebAddressBookTests
                 return true;
             }
 
-            return firstName == other.firstName && lastName == other.lastName;
+            return firstName == other.firstName & lastName == other.lastName;
         }
 
         public int CompareTo(ContactData other)
@@ -408,7 +408,5 @@ namespace WebAddressBookTests
                 contactNotes = value;
             }
         }
-
-
     }
 }
