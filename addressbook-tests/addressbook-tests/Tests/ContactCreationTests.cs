@@ -44,7 +44,6 @@ namespace WebAddressBookTests
 
             List<ContactData> oldContacts = app.Contacts.GetContactList();
 
-   
             app.Contacts.Create(contact);
 
             Assert.AreEqual(oldContacts.Count + 1, app.Contacts.GetContactsListCount());
