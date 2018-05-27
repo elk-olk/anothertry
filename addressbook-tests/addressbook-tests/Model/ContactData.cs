@@ -9,33 +9,10 @@ namespace WebAddressBookTests
 {
     public class ContactData : IEquatable <ContactData>, IComparable<ContactData>
     {
-        private string firstName;
-        private string middleName = "";
-        private string lastName = "";
-        private string nickName = "";
-        private string foto;
-        private string title = "" ;
-        private string company = "";
-        private string contactAddress1;
-        private string phoneHome = "";
-        private string phoneMobile = "";
-        private string phoneWork = "";
-        private string fax = "";
-        private string eMail1 = "";
-        private string eMail2 = "";
-        private string eMail3 = "";
-        private string homePage = "";
-        private string birthDay = null;
-        private string birthMonth = null;
-        private string birthYear = null;
-        private string annivDay = null;
-        private string annivMonth = null;
-        private string annivYear = null;
-        private string contactGroup = null;
-        private string contactAddress2 = "";
-        private string phone2 = "";
-        private string contactNotes = "";
-
+        private string allPhones;
+        private string allEmails;
+        private string contactDetailsInOneString;
+        private string address;
 
         public bool Equals(ContactData other)
         {
@@ -49,7 +26,7 @@ namespace WebAddressBookTests
                 return true;
             }
 
-            return lastName == other.lastName & firstName == other.firstName ;
+            return LastName == other.LastName & FirstName == other.FirstName;
         }
 
         public int CompareTo(ContactData other)
@@ -59,353 +36,145 @@ namespace WebAddressBookTests
                 return 1;
             }
 
-            if (lastName.CompareTo(other.LastName) == 0)
+            if (LastName.CompareTo(other.LastName) == 0)
             {
-                return(firstName.CompareTo(other.firstName));
+                return(FirstName.CompareTo(other.FirstName));
 
             }
 
-            return lastName.CompareTo(other.LastName);
+            return LastName.CompareTo(other.LastName);
         }
 
 
         public override int GetHashCode()
         {
-            return firstName.GetHashCode() & lastName.GetHashCode(); 
+            return FirstName.GetHashCode() & LastName.GetHashCode(); 
 
         }
                     
-
-        //public ContactData(string firstName)
-        //{
-        //    this.firstName = firstName;
-        //}
-
         public ContactData(string firstName, string lastName)
         {
-            this.firstName = firstName;
-            this.lastName = lastName;
+            FirstName = firstName;
+            LastName = lastName;
         }
 
-        public string FirstName
+        public ContactData(string contactDetailsInOneString)
+        {
+            ContactDetailsInOneString = contactDetailsInOneString;
+        }
+
+        public string FirstName { get; set; }
+        public string MiddleName { get; set; }
+        public string LastName { get; set; }
+        public string NickName { get; set; }
+        public string Foto { get; set; }
+        public string Title { get; set; }
+        public string Company { get; set; }
+        public string Address { get { return CleanUp(address); } set { address = value; } }
+        public string PhoneHome { get; set; }
+        public string PhoneMobile { get; set; }
+        public string PhoneWork { get; set; }
+        public string Fax { get; set; }
+        public string EMail1 { get; set; }
+        public string EMail2 { get; set; }
+        public string EMail3 { get; set; }
+        public string HomePage { get; set; }
+        public string BirthDay { get; set; }
+        public string BirthMonth { get; set; }
+        public string BirthYear { get; set; }
+        public string AnnivDay { get; set; }
+        public string AnnivMonth { get; set; }
+        public string AnnivYear { get; set; }
+        public string ContactGroup { get; set; }
+        public string Address2 { get; set; }
+        public string Phone2 { get; set; }
+        public string ContactNotes { get; set; }
+        public string AllPhones
         {
             get
             {
-                return firstName;
+                if (allPhones != null)
+                {
+                    return allPhones;
+                }
+                else
+                {
+                    return (CleanUp(PhoneHome) + CleanUp(PhoneMobile) + CleanUp(PhoneWork)+CleanUp(Phone2)).Trim();
+                }
             }
+
             set
             {
-                firstName = value;
+                allPhones = value;
             }
         }
-
-        public string MiddleName
+        public string AllEmails
         {
             get
             {
-                return middleName;
+                if (allEmails != null)
+                {
+                    return allEmails;
+                }
+                else
+                {
+                    return (CleanUp(EMail1) + CleanUp(EMail2) + CleanUp(EMail3)).Trim();
+                }
             }
+
             set
             {
-                middleName = value;
+                allEmails = value;
             }
         }
 
-        public string LastName
+        public string ContactDetailsInOneString
         {
             get
             {
-                return lastName;
+                    return (CleanUp(FirstName) + CleanUp(MiddleName) + CleanUp(LastName) +("\r\n")
+                         + CleanUp(NickName) + ("\r\n")
+                         + CleanUp(Title) + ("\r\n")
+                         + CleanUp(Company) + ("\r\n")
+                         + CleanUp(Address) + ("\r\n")
+                         + CleanUp(PhoneHome) + ("\r\n")
+                         + CleanUp(PhoneMobile) + ("\r\n")
+                         + CleanUp(PhoneWork) + ("\r\n")
+                         + CleanUp(Fax) + ("\r\n")
+                         + CleanUp(EMail1) + ("\r\n")
+                         + CleanUp(EMail2) + ("\r\n")
+                         + CleanUp(EMail3) + ("\r\n")
+                         + CleanUp(HomePage) + ("\r\n")
+                         + CleanUp(BirthDay)+ CleanUp(BirthMonth)+CleanUp(BirthYear) + ("\r\n")
+                         + CleanUp(AnnivDay)+ CleanUp(AnnivMonth) + CleanUp(AnnivYear) + ("\r\n")
+                         + CleanUp(Address2) + ("\r\n")
+                         + CleanUp(Phone2) + ("\r\n")
+                         + CleanUp(ContactNotes))
+                         .Trim();
+                
             }
+
             set
             {
-                lastName = value;
-            }
-        }
-
-        public string NickName
-        {
-            get
-            {
-                return nickName;
-            }
-            set
-            {
-                nickName = value;
-            }
-        }
-
-        public string Foto
-        {
-            get
-            {
-                return foto;
-            }
-            set
-            {
-                foto = value;
-            }
-        }
-
-        public string Title
-        {
-            get
-            {
-                return title;
-            }
-            set
-            {
-                title = value;
-            }
-        }
-
-
-        public string Company
-        {
-            get
-            {
-                return company;
-            }
-            set
-            {
-                company = value;
-            }
-        }
-
-
-        public string Address
-        {
-            get
-            {
-                return contactAddress1;
-            }
-            set
-            {
-                contactAddress1 = value;
-            }
-        }
-
-
-        public string PhoneHome
-        {
-            get
-            {
-                return phoneHome;
-            }
-            set
-            {
-                phoneHome = value;
+                contactDetailsInOneString = value;
             }
         }
 
 
-        public string PhoneMobile
+
+        private string CleanUp(string inputData)
         {
-            get
+            if (inputData == null || inputData == "")
             {
-                return phoneMobile;
+                return "";
             }
-            set
+            else
             {
-                phoneMobile = value;
-            }
-        }
-
-
-        public string PhoneWork
-        {
-            get
-            {
-                return phoneWork;
-            }
-            set
-            {
-                phoneWork = value;
-            }
-        }
-
-
-        public string Fax
-        {
-            get
-            {
-                return fax;
-            }
-            set
-            {
-                fax = value;
-            }
-        }
-
-        public string EMail1
-        {
-            get
-            {
-                return eMail1;
-            }
-            set
-            {
-                eMail1 = value;
-            }
-        }
-
-        public string EMail2
-        {
-            get
-            {
-                return eMail2;
-            }
-            set
-            {
-                eMail2 = value;
-            }
-        }
-
-        public string EMail3
-        {
-            get
-            {
-                return eMail3;
-            }
-            set
-            {
-                eMail3 = value;
-            }
-        }
-
-
-        public string HomePage
-        {
-            get
-            {
-                return homePage;
-            }
-            set
-            {
-                homePage = value;
-            }
-        }
-
-
-        public string BirthDay
-        {
-            get
-            {
-                return birthDay;
-            }
-            set
-            {
-                birthDay = value;
-            }
-        }
-
-
-        public string BirthMonth
-        {
-            get
-            {
-                return birthMonth;
-            }
-            set
-            {
-                birthMonth = value;
-            }
-        }
-
-        public string BirthYear
-        {
-            get
-            {
-                return birthYear;
-            }
-            set
-            {
-                birthYear = value;
-            }
-        }
-
-
-        public string AnnivDay
-        {
-            get
-            {
-                return annivDay;
-            }
-            set
-            {
-                annivDay = value;
-            }
-        }
-
-        public string AnnivMonth
-        {
-            get
-            {
-                return annivMonth;
-            }
-            set
-            {
-                annivMonth = value;
-            }
-        }
-
-        public string AnnivYear
-        {
-            get
-            {
-                return annivYear;
-            }
-            set
-            {
-                annivYear = value;
-            }
-        }
-
-        public string ContactGroup
-        {
-            get
-            {
-                return contactGroup;
-            }
-            set
-            {
-                contactGroup = value;
-            }
-        }
-
-        public string Address2
-        {
-            get
-            {
-                return contactAddress2;
-            }
-            set
-            {
-                contactAddress2 = value;
-            }
-        }
-
-        public string Phone2
-        {
-            get
-            {
-                return phone2;
-            }
-            set
-            {
-                phone2 = value;
-            }
-        }
-
-        public string ContactNotes
-        {
-            get
-            {
-                return contactNotes;
-            }
-            set
-            {
-                contactNotes = value;
+                return inputData.Replace(" ", "")
+                                .Replace("-", "")
+                                .Replace("(", "")
+                                .Replace(")", "")
+                                + "\r\n";
             }
         }
     }

@@ -49,7 +49,7 @@ namespace WebAddressBookTests
 
             List<ContactData> oldContacts = app.Contacts.GetContactList();
 
-            app.Contacts.Modify(modifData);
+            app.Contacts.Modify(modifData, 0);
 
             Assert.AreEqual(oldContacts.Count, app.Contacts.GetContactsListCount());
 
