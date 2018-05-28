@@ -45,18 +45,14 @@ namespace WebAddressBookTests
             return Name.GetHashCode();
         }
 
+        public string Name { get; set; }
+        public string Header { get; set; }
+        public string Footer { get; set; }
+        public string Id { get; set; }
 
         public override string ToString()
         {
-            return "name=" + Name;
+            return "name=" + Name + "\n header =" + Header + "\n footer" + Footer;
         }
-
-        public string Name { get; set; }
- 
-        public string Header { get; set; }
-
-        public string Footer { get; set; }
-
-        public string Id { get; set; }
     }
 }

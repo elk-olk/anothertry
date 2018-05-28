@@ -47,8 +47,6 @@ namespace WebAddressBookTests
             return new ContactData(details);
         }
 
-
-
         public ContactData GetContactInfoFromEditFormCompareToDetails(int index)
         {
             manager.Navigator.GoToHomePage();
