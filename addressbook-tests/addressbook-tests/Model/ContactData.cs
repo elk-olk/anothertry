@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
+
 namespace WebAddressBookTests
 {
     public class ContactData : IEquatable <ContactData>, IComparable<ContactData>
@@ -132,25 +133,7 @@ namespace WebAddressBookTests
         {
             get
             {
-                    return (CleanUp(FirstName) + CleanUp(MiddleName) + CleanUp(LastName) +("\r\n")
-                         + CleanUp(NickName) + ("\r\n")
-                         + CleanUp(Title) + ("\r\n")
-                         + CleanUp(Company) + ("\r\n")
-                         + CleanUp(Address) + ("\r\n")
-                         + CleanUp(PhoneHome) + ("\r\n")
-                         + CleanUp(PhoneMobile) + ("\r\n")
-                         + CleanUp(PhoneWork) + ("\r\n")
-                         + CleanUp(Fax) + ("\r\n")
-                         + CleanUp(EMail1) + ("\r\n")
-                         + CleanUp(EMail2) + ("\r\n")
-                         + CleanUp(EMail3) + ("\r\n")
-                         + CleanUp(HomePage) + ("\r\n")
-                         + CleanUp(BirthDay)+ CleanUp(BirthMonth)+CleanUp(BirthYear) + ("\r\n")
-                         + CleanUp(AnnivDay)+ CleanUp(AnnivMonth) + CleanUp(AnnivYear) + ("\r\n")
-                         + CleanUp(Address2) + ("\r\n")
-                         + CleanUp(Phone2) + ("\r\n")
-                         + CleanUp(ContactNotes))
-                         .Trim();
+                return CleanUpDetails(contactDetailsInOneString);
                 
             }
 
@@ -160,7 +143,25 @@ namespace WebAddressBookTests
             }
         }
 
+        private string CleanUpDetails(string contactDetailsInOneString)
+        {
 
+                return contactDetailsInOneString.Replace(" ", "")
+                                                .Replace("-", "")
+                                                .Replace("(", "")
+                                                .Replace(")", "")
+                                                .Replace("H:", "")
+                                                .Replace("W:", "")
+                                                .Replace("M:", "")
+                                                .Replace("F:", "")
+                                                .Replace("P:", "")
+                                                .Replace("Homepage:", "")
+                                                .Replace("Birthday", "")
+                                                .Replace("Anniversary", "")
+                                                .Replace("\r\n", "")
+                                                ;
+            
+        }
 
         private string CleanUp(string inputData)
         {
@@ -174,6 +175,7 @@ namespace WebAddressBookTests
                                 .Replace("-", "")
                                 .Replace("(", "")
                                 .Replace(")", "")
+                                .Replace("\r\n", "")
                                 + "\r\n";
             }
         }

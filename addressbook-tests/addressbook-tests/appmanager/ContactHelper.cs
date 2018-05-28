@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
+
  
 
 namespace WebAddressBookTests
@@ -48,7 +49,7 @@ namespace WebAddressBookTests
 
 
 
-        public ContactData GetContactInfoFromEditForm(int index)
+        public ContactData GetContactInfoFromEditFormCompareToDetails(int index)
         {
             manager.Navigator.GoToHomePage();
             ClickModifyContact(index);
@@ -76,31 +77,35 @@ namespace WebAddressBookTests
             string address2 = driver.FindElement(By.Name("address2")).GetAttribute("value");
             string phone2 = driver.FindElement(By.Name("phone2")).GetAttribute("value");
             string notes = driver.FindElement(By.Name("notes")).GetAttribute("value");
+            int age = (DateTime.Today - Convert.ToDateTime(birthYear + birthMonth + birthDay)).Days/365;
+            int anniv = (DateTime.Today - Convert.ToDateTime(annivYear + annivMonth + annivDay)).Days/365;
 
-            string contactDetails = firstName + middleName + lastName + ("\r\n")
-                                  + nickName + ("\r\n")
-                                  + title + ("\r\n")
-                                  + company + ("\r\n")
-                                  + address + ("\r\n")
-                                  + homePage + ("\r\n") 
-                                  + mobilePhone + ("\r\n") 
-                                  + workPhone + ("\r\n") 
-                                  + fax + ("\r\n")
-                                  + email1 + ("\r\n") 
-                                  + email2 + ("\r\n") 
-                                  + email3 + ("\r\n") 
-                                  + homePage + ("\r\n") 
-                                  + birthDay + birthMonth + birthYear + ("\r\n")
-                                  + annivDay + annivMonth + annivYear + ("\r\n")
-                                  + address2 + ("\r\n")
-                                  + phone2 + ("\r\n")
+            string contactDetails = (firstName + middleName + lastName).Trim() 
+                                  + nickName 
+                                  + title
+                                  + company 
+                                  + address 
+                                  + homePhone 
+                                  + mobilePhone 
+                                  + workPhone
+                                  + fax
+                                  + email1  
+                                  + email2
+                                  + email3 
+                                  + homePage  
+                                  + birthDay + (".")+ birthMonth + birthYear 
+                                  + age
+                                  + annivDay + (".")+ annivMonth + annivYear 
+                                  + anniv
+                                  + address2 
+                                  + phone2 
                                   + notes;
 
             return new ContactData(contactDetails);
 
         }
 
-        public ContactData GetContactInfoFromEditForm2(int index)
+        public ContactData GetContactInfoFromEditFormCompareToTable(int index)
         {
             manager.Navigator.GoToHomePage();
             ClickModifyContact(index);
