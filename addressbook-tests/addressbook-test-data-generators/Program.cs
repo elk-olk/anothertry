@@ -52,8 +52,11 @@ namespace addressbook_test_data_generators
                 List<ContactData> contacts = new List<ContactData>();
                 for (int i = 0; i < count; i++)
                 {
-                    contacts.Add(new ContactData(TestBase.GenerateRandomString(10))
+                    contacts.Add(new ContactData()
                     {
+                        FirstName = TestBase.GenerateRandomString(10),
+                        MiddleName = TestBase.GenerateRandomString(10),
+                        LastName = TestBase.GenerateRandomString(10),
                         Address = TestBase.GenerateRandomString(10),
                         Address2 = TestBase.GenerateRandomString(10),
                         AnnivDay = "1",
@@ -70,27 +73,27 @@ namespace addressbook_test_data_generators
                         Fax = TestBase.GenerateRandomString(10),
                         HomePage = "www.olk.com",
                         NickName = TestBase.GenerateRandomString(10),
-                        MiddleName = TestBase.GenerateRandomString(10),
                         Title = "Mrs",
-                        Company = "Turbo",
+                        Company = TestBase.GenerateRandomString(10),
                         Phone2 = "+3804449055123",
                         PhoneHome = "+380444905514",
                         PhoneMobile = "380634905515",
-                        PhoneWork = "380444905516"
+                        PhoneWork = "380444905516",
+                        ContactDetailsInOneString = TestBase.GenerateRandomString(10)
                     });
                 }
                 if (format == "csv")
                 {
                     WriteContactsToCsvFile(contacts, writer);
                 }
-                //else if (format == "json")
-                //{
-                //    WriteContactsToCsvFile(contacts, writer);
-                //}
-                //else if (format == "xml")
-                //{
-                //    WriteContactsToCsvFile(contacts, writer);
-                //}
+                else if (format == "json")
+                {
+                    WriteContactsToJsonFile(contacts, writer);
+                }
+                else if (format == "xml")
+                {
+                    WriteContactsToXmlFile(contacts, writer);
+                }
                 else
                 {
                     System.Console.Out.Write("Unrecognized format " + format);
@@ -100,8 +103,6 @@ namespace addressbook_test_data_generators
             {
                 System.Console.Out.Write("Unrecognized type of data " + typeofdata);
             }
-
-
 
             writer.Close();
         }
@@ -129,7 +130,9 @@ namespace addressbook_test_data_generators
         {
             foreach (ContactData contact in contacts)
             {
-                writer.WriteLine(String.Format("${0},${1},${2},${3},${4},${5},${6},${7},${8},${9},${10},${11},${12},${13},${14},${15},${16},${17}${18},${19},${20},${21},${22}",
+                writer.WriteLine(String.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23},{24}",
+                    contact.FirstName,
+                    contact.LastName,
                     contact.Address,
                     contact.Address2,
                     contact.AnnivDay,
@@ -157,5 +160,14 @@ namespace addressbook_test_data_generators
             }
         }
 
+        static void WriteContactsToXmlFile(List<ContactData> contacts, StreamWriter writer)
+        {
+            new XmlSerializer(typeof(List<ContactData>)).Serialize(writer, contacts);
+        }
+
+        static void WriteContactsToJsonFile(List<ContactData> contatcts, StreamWriter writer)
+        {
+            writer.Write(JsonConvert.SerializeObject(contatcts, Newtonsoft.Json.Formatting.Indented));
+        }
     }
 }

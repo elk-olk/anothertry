@@ -47,12 +47,15 @@ namespace WebAddressBookTests
         }
 
 
-        public override int GetHashCode()
-        {
-            return FirstName.GetHashCode() & LastName.GetHashCode(); 
+        //public override int GetHashCode()
+        //{
+        //    return FirstName.GetHashCode() & LastName.GetHashCode(); 
+        //}
 
+        public ContactData()
+        {
         }
-                    
+
         public ContactData(string firstName, string lastName)
         {
             FirstName = firstName;
@@ -133,8 +136,7 @@ namespace WebAddressBookTests
         {
             get
             {
-                return CleanUpDetails(contactDetailsInOneString);
-                
+                return CleanUpDetails(contactDetailsInOneString);       
             }
 
             set
@@ -146,21 +148,21 @@ namespace WebAddressBookTests
         private string CleanUpDetails(string contactDetailsInOneString)
         {
 
-                return contactDetailsInOneString.Replace(" ", "")
-                                                .Replace("-", "")
-                                                .Replace("(", "")
-                                                .Replace(")", "")
-                                                .Replace("H:", "")
-                                                .Replace("W:", "")
-                                                .Replace("M:", "")
-                                                .Replace("F:", "")
-                                                .Replace("P:", "")
-                                                .Replace("Homepage:", "")
-                                                .Replace("Birthday", "")
-                                                .Replace("Anniversary", "")
-                                                .Replace("\r\n", "")
-                                                ;
-            
+            return contactDetailsInOneString.Replace(" ", "")
+                                            .Replace("-", "")
+                                            .Replace("(", "")
+                                            .Replace(")", "")
+                                            .Replace("H:", "")
+                                            .Replace("W:", "")
+                                            .Replace("M:", "")
+                                            .Replace("F:", "")
+                                            .Replace("P:", "")
+                                            .Replace("Homepage:", "")
+                                            .Replace("Birthday", "")
+                                            .Replace("Anniversary", "")
+                                            .Replace("\r\n", "")
+                                            ;
+
         }
 
         private string CleanUp(string inputData)
@@ -175,8 +177,8 @@ namespace WebAddressBookTests
                                 .Replace("-", "")
                                 .Replace("(", "")
                                 .Replace(")", "")
-                                .Replace("\r\n", "")
-                                + "\r\n";
+                                .Replace("\r\n", "");
+                                //+ "\r\n";
             }
         }
     }

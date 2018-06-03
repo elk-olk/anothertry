@@ -59,8 +59,6 @@ namespace WebAddressBookTests
         {
             return JsonConvert.DeserializeObject<List<GroupData>>(
                 File.ReadAllText(@"groups.json"));
-
-
         }
 
 
