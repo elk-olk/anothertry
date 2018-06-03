@@ -9,7 +9,7 @@ using NUnit.Framework;
 namespace WebAddressBookTests
 {
     [TestFixture]
-    public class GroupRemovalTest: AuthTestBase
+    public class GroupRemovalTest: GroupTestBase
     {
  
         [Test]
@@ -20,13 +20,13 @@ namespace WebAddressBookTests
                 app.Groups.CreateFirstGroup();
             }
 
-            List<GroupData> oldGroups = app.Groups.GetGroupList();
+            List<GroupData> oldGroups = GroupData.GetAll();
             GroupData toBeRemoved = oldGroups[0];
-            app.Groups.Remove(0);
+            app.Groups.Remove(toBeRemoved);
 
             Assert.AreEqual(oldGroups.Count - 1, app.Groups.GetGroupsCount());
 
-            List<GroupData> newGroups = app.Groups.GetGroupList();
+            List<GroupData> newGroups = GroupData.GetAll();
             oldGroups.RemoveAt(0);
             oldGroups.Sort();
             newGroups.Sort();

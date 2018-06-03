@@ -8,7 +8,7 @@ using System.Collections.Generic;
 namespace WebAddressBookTests
 {
     [TestFixture]
-    public class ContactRemoval : AuthTestBase
+    public class ContactRemoval : ContactTestBase
     {
 
         [Test]
@@ -19,9 +19,10 @@ namespace WebAddressBookTests
                 app.Contacts.CreateFirstContact();
             }
 
-            List<ContactData> oldContacts = app.Contacts.GetContactList();
+            List<ContactData> oldContacts = ContactData.GetAll();
+            ContactData toBeRemoved = oldContacts[0];
 
-            app.Contacts.Remove(0);
+            app.Contacts.Remove(toBeRemoved);
 
             List<ContactData> newContacts = app.Contacts.GetContactList();
 
@@ -31,5 +32,6 @@ namespace WebAddressBookTests
             newContacts.Sort();
             Assert.AreEqual(oldContacts, newContacts);
         }
-    }
+
+   }
 }

@@ -79,6 +79,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="appmanager\AuthTestBase.cs" />
+    <Compile Include="appmanager\ContactTestBase.cs" />
+    <Compile Include="appmanager\GroupTestBase.cs" />
     <Compile Include="Model\AddressbookDB.cs" />
     <Compile Include="Tests\ContactDetailsTests.cs" />
     <Compile Include="Tests\ContactInformationTests.cs" />
@@ -127,6 +129,7 @@
     <None Include="LinqToDB.Templates\T4Model.ttinclude" />
     <None Include="LinqToDB.Templates\Validation.ttinclude" />
     <None Include="packages.config" />
+    <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <None Include="groups.csv">

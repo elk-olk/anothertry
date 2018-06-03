@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using LinqToDB.Mapping;
 
 
 namespace WebAddressBookTests
 {
-    public class ContactData : IEquatable <ContactData>, IComparable<ContactData>
+    [Table(Name = "addressbook")]
+    public class ContactData : IEquatable<ContactData>, IComparable<ContactData>
     {
         private string allPhones;
         private string allEmails;
@@ -39,7 +40,7 @@ namespace WebAddressBookTests
 
             if (LastName.CompareTo(other.LastName) == 0)
             {
-                return(FirstName.CompareTo(other.FirstName));
+                return (FirstName.CompareTo(other.FirstName));
 
             }
 
@@ -66,9 +67,12 @@ namespace WebAddressBookTests
         {
             ContactDetailsInOneString = contactDetailsInOneString;
         }
-
+        [Column(Name = "firstname")]
         public string FirstName { get; set; }
+
         public string MiddleName { get; set; }
+
+        [Column(Name = "lastname")]
         public string LastName { get; set; }
         public string NickName { get; set; }
         public string Foto { get; set; }
@@ -93,6 +97,13 @@ namespace WebAddressBookTests
         public string Address2 { get; set; }
         public string Phone2 { get; set; }
         public string ContactNotes { get; set; }
+
+        [Column(Name = "id"), PrimaryKey, Identity]
+        public string Id { get; set; }
+
+        [Column(Name = "deprecated")]
+        public string IsActive { get; set; }
+
         public string AllPhones
         {
             get
@@ -103,7 +114,7 @@ namespace WebAddressBookTests
                 }
                 else
                 {
-                    return (CleanUp(PhoneHome) + CleanUp(PhoneMobile) + CleanUp(PhoneWork)+CleanUp(Phone2)).Trim();
+                    return (CleanUp(PhoneHome) + CleanUp(PhoneMobile) + CleanUp(PhoneWork) + CleanUp(Phone2)).Trim();
                 }
             }
 
@@ -136,7 +147,7 @@ namespace WebAddressBookTests
         {
             get
             {
-                return CleanUpDetails(contactDetailsInOneString);       
+                return CleanUpDetails(contactDetailsInOneString);
             }
 
             set
@@ -177,8 +188,17 @@ namespace WebAddressBookTests
                                 .Replace("-", "")
                                 .Replace("(", "")
                                 .Replace(")", "")
-                                .Replace("\r\n", "");
-                                //+ "\r\n";
+                                .Replace("\r\n", "")
+                                + "\r\n";
+            }
+        }
+
+        public static List<ContactData> GetAll()
+        {
+
+            using (AddressbookDB db = new AddressbookDB())
+            {
+                return (from c in db.Contacts where c.IsActive == "0000-00-00 00:00:00" select c ).ToList();
             }
         }
     }

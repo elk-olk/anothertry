@@ -151,11 +151,29 @@ namespace WebAddressBookTests
             return this;
         }
 
+        public void Remove(ContactData contact)
+        {
+            manager.Navigator.GoToHomePage();
+            SelectContact(contact.Id);
+            SubmitContactDelete();
+            CloseAlertAndGetItsText();
+        }
+
         public ContactHelper Modify(ContactData newcData, int index)
         {
             manager.Navigator.GoToContactsPage();
             ClickModifyContact(index);
             FillContactForm(newcData);
+            SubmitContactUpdate();
+            ReturnToHomePage();
+            return this;
+        }
+
+        public ContactHelper Modify(ContactData contact, ContactData newData, int index)
+        {
+            manager.Navigator.GoToContactsPage();
+            ClickModifyContact(index);
+            FillContactForm(newData);
             SubmitContactUpdate();
             ReturnToHomePage();
             return this;
@@ -233,6 +251,13 @@ namespace WebAddressBookTests
         {
             driver.FindElement(By.LinkText("home")).Click();
             driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + (index + 1) + "]")).Click();
+            return this;
+        }
+
+
+        public ContactHelper SelectContact(string id)
+        {
+            driver.FindElement(By.XPath("(//input[@name='selected[]' and @id ='" + id + "'])")).Click();
             return this;
         }
 
